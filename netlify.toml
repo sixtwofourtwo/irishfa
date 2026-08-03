@@ -1,0 +1,13 @@
+# Netlify deployment configuration
+# Deploy: connect this repo in Netlify and it will auto-detect these settings.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Single-page-app fallback: send all routes to index.html so React Router
+# can handle client-side navigation (fixes 404s on refresh / deep links).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
