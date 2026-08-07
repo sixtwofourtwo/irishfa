@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom'
 import { Search, Bell, Menu, CalendarDays } from 'lucide-react'
 import { titleByPath } from '../nav.js'
+import Logo from './Logo.jsx'
 
 export default function Topbar({ onMenu }) {
   const { pathname } = useLocation()
@@ -35,7 +36,9 @@ export default function Topbar({ onMenu }) {
         <span className="dot" />
       </button>
 
-      <div className="avatar" title="Signed in (demo)">IFA</div>
+      <div className="avatar" title="Irish Football Association">
+        <Logo size={30} fallback={<span>IFA</span>} />
+      </div>
     </header>
   )
 }

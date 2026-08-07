@@ -1,13 +1,14 @@
 import { NavLink } from 'react-router-dom'
 import * as Icons from 'lucide-react'
 import { nav } from '../nav.js'
+import Logo from './Logo.jsx'
 
 export default function Sidebar({ open, onClose }) {
   return (
     <aside className={`sidebar${open ? ' open' : ''}`}>
       <div className="sidebar__brand">
         <div className="sidebar__logo">
-          <Icons.ShieldCheck size={22} color="#fff" />
+          <Logo size={34} fallback={<Icons.ShieldCheck size={22} color="var(--brand-600)" />} />
         </div>
         <div>
           <h1>Fan Intelligence</h1>
