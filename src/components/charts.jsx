@@ -15,6 +15,14 @@ const axisProps = {
   axisLine: { stroke: INK.axis },
 }
 
+// Compact large numbers on axes so 4-5 digit values are not clipped (6000 -> 6k).
+const compact = (v) => {
+  if (typeof v !== 'number') return v
+  if (Math.abs(v) >= 1000) return `${+(v / 1000).toFixed(1)}k`
+  return v
+}
+const yAxis = { ...axisProps, width: 50, tickFormatter: compact }
+
 // Shared custom tooltip — clean card, colour swatches, tabular values.
 function ChartTip({ active, payload, label, prefix = '', suffix = '', formatter }) {
   if (!active || !payload || !payload.length) return null
@@ -42,7 +50,7 @@ function ChartTip({ active, payload, label, prefix = '', suffix = '', formatter 
 export function StackedArea({ data, keys, height = 280, prefix = '', suffix = '' }) {
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <AreaChart data={data} margin={{ top: 8, right: 8, left: -14, bottom: 0 }}>
+      <AreaChart data={data} margin={{ top: 8, right: 8, left: -6, bottom: 0 }}>
         <defs>
           {keys.map((k, i) => (
             <linearGradient key={k.key} id={`grad-${k.key}`} x1="0" y1="0" x2="0" y2="1">
@@ -53,7 +61,7 @@ export function StackedArea({ data, keys, height = 280, prefix = '', suffix = ''
         </defs>
         <CartesianGrid stroke={INK.grid} vertical={false} />
         <XAxis dataKey="x" {...axisProps} />
-        <YAxis {...axisProps} width={44} />
+        <YAxis {...yAxis} />
         <Tooltip content={<ChartTip prefix={prefix} suffix={suffix} />} />
         {keys.map((k) => (
           <Area
@@ -78,10 +86,10 @@ export function StackedArea({ data, keys, height = 280, prefix = '', suffix = ''
 export function LineTrend({ data, keys, height = 260, prefix = '', suffix = '' }) {
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <LineChart data={data} margin={{ top: 8, right: 12, left: -14, bottom: 0 }}>
+      <LineChart data={data} margin={{ top: 8, right: 12, left: -6, bottom: 0 }}>
         <CartesianGrid stroke={INK.grid} vertical={false} />
         <XAxis dataKey="x" {...axisProps} />
-        <YAxis {...axisProps} width={44} />
+        <YAxis {...yAxis} />
         <Tooltip content={<ChartTip prefix={prefix} suffix={suffix} />} />
         {keys.map((k) => (
           <Line
@@ -104,7 +112,7 @@ export function LineTrend({ data, keys, height = 260, prefix = '', suffix = '' }
 export function AreaTrend({ data, dataKey, name, color = BRAND[600], height = 240, prefix = '', suffix = '' }) {
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <AreaChart data={data} margin={{ top: 8, right: 12, left: -14, bottom: 0 }}>
+      <AreaChart data={data} margin={{ top: 8, right: 12, left: -6, bottom: 0 }}>
         <defs>
           <linearGradient id={`area-${dataKey}`} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor={color} stopOpacity={0.26} />
@@ -113,7 +121,7 @@ export function AreaTrend({ data, dataKey, name, color = BRAND[600], height = 24
         </defs>
         <CartesianGrid stroke={INK.grid} vertical={false} />
         <XAxis dataKey="x" {...axisProps} />
-        <YAxis {...axisProps} width={44} />
+        <YAxis {...yAxis} />
         <Tooltip content={<ChartTip prefix={prefix} suffix={suffix} />} />
         <Area
           type="monotone"
@@ -134,10 +142,10 @@ export function AreaTrend({ data, dataKey, name, color = BRAND[600], height = 24
 export function BarsV({ data, keys, height = 260, prefix = '', suffix = '', stacked = false }) {
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <BarChart data={data} margin={{ top: 8, right: 8, left: -14, bottom: 0 }} barCategoryGap="24%">
+      <BarChart data={data} margin={{ top: 8, right: 8, left: -6, bottom: 0 }} barCategoryGap="24%">
         <CartesianGrid stroke={INK.grid} vertical={false} />
         <XAxis dataKey="x" {...axisProps} />
-        <YAxis {...axisProps} width={44} />
+        <YAxis {...yAxis} />
         <Tooltip cursor={{ fill: 'rgba(10,125,60,0.05)' }} content={<ChartTip prefix={prefix} suffix={suffix} />} />
         {keys.map((k) => (
           <Bar

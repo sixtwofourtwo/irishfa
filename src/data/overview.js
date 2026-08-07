@@ -32,13 +32,12 @@ export const kpis = [
     sub: 'tickets, app, retail & F&B',
   },
   {
+    // Real figure from the IFA attendance dataset (Euro 2022 vs England).
     id: 'attendance',
-    label: 'Avg. home attendance',
-    value: '14,320',
+    label: 'Record home crowd',
+    value: '30,785',
     icon: 'Ticket',
-    delta: 21.5,
-    deltaDir: 'up',
-    sub: 'last 5 home fixtures',
+    sub: 'Euro 2022 vs England (real)',
   },
 ]
 

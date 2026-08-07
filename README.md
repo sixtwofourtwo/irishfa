@@ -11,11 +11,19 @@ Technology & Innovation), addressing the challenge of
 > unified "single pane of glass" for supporter data would look and feel like for
 > IFA decision-makers.
 >
-> **What this is *not*:** a live data integration. All figures are realistic but
+> **What this is *not*:** a live data integration. Most figures are realistic but
 > **illustrative mock data** — no real personal data and no live connections to
 > Ticketmaster, Opta, Mailchimp, etc. Those integrations would require API
 > credentials, commercial agreements and GDPR/data-sharing controls that sit
 > outside the scope of a prototype.
+>
+> **One dataset is real:** the **Match-day & Attendance** screen is powered by an
+> actual IFA record of 73 Northern Ireland Women's Senior Team fixtures
+> (2017–2026) — real dates, competitions, venues, capacities, attendances and
+> results (`src/data/matchHistory.js`). It demonstrates the platform working with
+> genuine data, including the "assortment of venues" reality: home games rotate
+> across six grounds around Northern Ireland (Seaview, Windsor Park, Mourneview
+> Park, Shamrock Park, Inver Park and the Ballymena Showgrounds).
 
 ---
 
