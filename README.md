@@ -113,6 +113,7 @@ src/
 
 ---
 
-*Prototype — illustrative data only. Not affiliated with, or endorsed by, the
-Irish Football Association. Third-party names (Ticketmaster, Opta, Mailchimp,
-Tableau, etc.) are used only to illustrate data-source types.*
+*Prototype — illustrative data only. The Irish Football Association crest
+(`public/ifa-crest.png`) is used with the IFA's permission for illustrative
+purposes as part of this academic project. Third-party names (Ticketmaster,
+Opta, Mailchimp, Tableau, etc.) are used only to illustrate data-source types.*
