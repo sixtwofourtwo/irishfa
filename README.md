@@ -121,5 +121,7 @@ src/
 
 *Prototype — illustrative data only. The Irish Football Association crest
 (`public/ifa-crest.png`) is used with the IFA's permission for illustrative
-purposes as part of this academic project. Third-party names (Ticketmaster,
-Opta, Mailchimp, Tableau, etc.) are used only to illustrate data-source types.*
+purposes as part of this academic project. The Northern Ireland council-boundary
+map (`public/topo_lgd.json`) is derived from OSNI/NISRA data under the Open
+Government Licence. Third-party names (Ticketmaster, Opta, Mailchimp, Tableau,
+etc.) are used only to illustrate data-source types.*

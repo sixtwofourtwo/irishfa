@@ -8,26 +8,28 @@
 
 export const NI_GROUNDS = ["Inver Park", "Mourneview Park", "National Stadium at Windsor Park", "Seaview", "Shamrock Park", "The Ballymena Showgrounds"]
 
-// city/club plus approximate map coordinates (x,y) in the 0–340 × 0–270
-// schematic-NI viewBox used by the venue map (VenueMap.jsx).
+// city/club plus real geographic coordinates [lng, lat] used to plot each
+// ground on the Northern Ireland map (VenueMap.jsx). The x/y fallbacks are
+// approximate positions in the schematic map's 340×270 viewBox, used only if
+// the real boundary file fails to load.
 export const venueMeta = {
   "Seaview": {
-    "city": "Belfast", "club": "Crusaders FC", "x": 251, "y": 140
+    "city": "Belfast", "club": "Crusaders FC", "lng": -5.9476, "lat": 54.6262, "x": 251, "y": 140, "dx": -6, "dy": -13
   },
   "National Stadium at Windsor Park": {
-    "city": "Belfast", "club": "National Stadium", "x": 246, "y": 160
+    "city": "Belfast", "club": "National Stadium", "lng": -5.9553, "lat": 54.5776, "x": 246, "y": 160, "dx": 4, "dy": 7
   },
   "Mourneview Park": {
-    "city": "Lurgan", "club": "Glenavon FC", "x": 214, "y": 176
+    "city": "Lurgan", "club": "Glenavon FC", "lng": -6.3360, "lat": 54.4589, "x": 214, "y": 176
   },
   "Shamrock Park": {
-    "city": "Portadown", "club": "Portadown FC", "x": 203, "y": 184
+    "city": "Portadown", "club": "Portadown FC", "lng": -6.4468, "lat": 54.4207, "x": 203, "y": 184
   },
   "Inver Park": {
-    "city": "Larne", "club": "Larne FC", "x": 263, "y": 102
+    "city": "Larne", "club": "Larne FC", "lng": -5.8240, "lat": 54.8554, "x": 263, "y": 102
   },
   "The Ballymena Showgrounds": {
-    "city": "Ballymena", "club": "Ballymena United FC", "x": 222, "y": 100
+    "city": "Ballymena", "club": "Ballymena United FC", "lng": -6.2760, "lat": 54.8657, "x": 222, "y": 100
   }
 }
 
