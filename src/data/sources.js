@@ -12,7 +12,7 @@ export const sources = [
     abbr: 'SA',
     color: '#0a7d3c',
     status: 'connected',
-    records: 128400,
+    records: 41800,
     recordLabel: 'in-app events',
     lastSync: '4 min ago',
     frequency: 'Real-time stream',
@@ -29,7 +29,7 @@ export const sources = [
     abbr: 'TM',
     color: '#026cdf',
     status: 'connected',
-    records: 63120,
+    records: 34200,
     recordLabel: 'ticket transactions',
     lastSync: '11 min ago',
     frequency: 'Hourly',
@@ -46,7 +46,7 @@ export const sources = [
     abbr: 'OP',
     color: '#e34948',
     status: 'connected',
-    records: 41,
+    records: 73,
     recordLabel: 'matches indexed',
     lastSync: '2 hr ago',
     frequency: 'Per fixture',
@@ -63,7 +63,7 @@ export const sources = [
     abbr: 'SO',
     color: '#4a3aa7',
     status: 'connected',
-    records: 894000,
+    records: 318000,
     recordLabel: 'engagements',
     lastSync: '18 min ago',
     frequency: 'Every 15 min',
@@ -80,7 +80,7 @@ export const sources = [
     abbr: 'MC',
     color: '#eda100',
     status: 'connected',
-    records: 39760,
+    records: 14200,
     recordLabel: 'subscribers',
     lastSync: '26 min ago',
     frequency: 'Every 30 min',
@@ -114,7 +114,7 @@ export const sources = [
     abbr: 'WB',
     color: '#eb6834',
     status: 'syncing',
-    records: 47210,
+    records: 18600,
     recordLabel: 'fan accounts',
     lastSync: 'in progress',
     frequency: 'Real-time stream',
@@ -132,7 +132,7 @@ export const sourceById = Object.fromEntries(sources.map((s) => [s.id, s]))
 export const integrationSummary = {
   connected: sources.filter((s) => s.status === 'connected').length,
   total: sources.length,
-  recordsUnified: 1.34, // millions
-  identitiesResolved: 48420,
+  recordsUnified: 0.44, // millions (all records across all sources)
+  identitiesResolved: 21500, // unified fan profiles
   matchRate: 78, // % of records matched to a unified fan ID
 }

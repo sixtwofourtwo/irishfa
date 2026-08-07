@@ -89,7 +89,7 @@ export default function FanDetail() {
 
       {/* Unified stats */}
       <div className="grid cols-4">
-        <StatTile label="Games attended" value={fan.stats.attendance} icon="Ticket" sub="this season" />
+        <StatTile label="Games attended" value={fan.stats.attendance} icon="Ticket" sub="matches on record" />
         <StatTile label="Ticket spend" value={`£${fan.stats.ticketSpend}`} icon="PoundSterling" sub="Ticketmaster" />
         <StatTile label="In-app spend" value={`£${fan.stats.appSpend}`} icon="Smartphone" sub="concourse & extras" />
         <StatTile label="Social interactions" value={fan.stats.socialEng} icon="Share2" sub="last 90 days" />

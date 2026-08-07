@@ -97,7 +97,7 @@ export default function Revenue() {
           <div className="flex between items-center">
             <span className="muted small">Avg. spend / attendee</span>
             <span className="flex items-center gap-8" style={{ fontWeight: 800, fontSize: 18 }}>
-              £23.10 <Delta value={5.6} dir="up" />
+              £8.40 <Delta value={5.6} dir="up" />
             </span>
           </div>
         </Card>
@@ -107,19 +107,19 @@ export default function Revenue() {
         <Card title="The monetisation opportunity" subtitle="Where consolidated data unlocks revenue">
           <div className="grid cols-3" style={{ gap: 18 }}>
             <Opportunity
-              value="£273k → £600k+"
+              value="£33k → £90k+"
               label="Digital-first upside"
-              body="26.8% of fans are digital-first but generate just 10% of revenue. Converting even a fraction to attendance or streaming is the single biggest opportunity."
+              body="Digital-first followers are 51% of the fanbase but generate only ~11% of revenue. Converting even a fraction to attendance or streaming is the single biggest opportunity."
             />
             <Opportunity
-              value="+£2.40"
+              value="+£0.90"
               label="Spend per attendee, cashless"
-              body="The in-app cashless push already lifted average concourse spend 12%. Targeted offers by segment can extend this further."
+              body="The in-app cashless push already lifted average concourse spend ~12%. Targeted offers by segment can extend this further."
             />
             <Opportunity
-              value="3,100"
+              value="900"
               label="Addressable fans recoverable"
-              body="A re-permission flow at ticket purchase could re-open marketing to thousands of currently un-contactable fans."
+              body="A re-permission flow at ticket purchase could re-open marketing to hundreds of currently un-contactable fans."
             />
           </div>
         </Card>

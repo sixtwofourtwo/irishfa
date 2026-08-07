@@ -166,7 +166,7 @@ export default function Fans() {
         <div className="card__foot">
           Showing {filtered.length} of {fans.length} sample profiles
           {activeSegmentName ? ` · filtered to ${activeSegmentName}` : ''}
-          {status !== 'all' ? ` · ${status}` : ''} · {(48420).toLocaleString()} total in platform
+          {status !== 'all' ? ` · ${status}` : ''} · {(21500).toLocaleString()} total in platform
         </div>
       </Card>
     </>

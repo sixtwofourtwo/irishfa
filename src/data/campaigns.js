@@ -1,5 +1,7 @@
 // ---------------------------------------------------------------------------
 // Campaigns & content — cross-platform activity and personalisation.
+// Reach, conversions and revenue are scaled to the real fanbase model
+// (~21,500 profiles, ~31.5k social reach, ~£308k season revenue).
 // ---------------------------------------------------------------------------
 
 export const campaigns = [
@@ -9,11 +11,11 @@ export const campaigns = [
     channel: 'Email + Social',
     status: 'live',
     audience: 'Committed regulars, Lapsed',
-    reach: 41200,
+    reach: 8400,
     engagement: 24.6,
-    conversions: 3180,
-    revenue: 71600,
-    roi: 6.2,
+    conversions: 640,
+    revenue: 9600,
+    roi: 4.8,
     goal: 'Ticket sales',
   },
   {
@@ -22,11 +24,11 @@ export const campaigns = [
     channel: 'Email + App',
     status: 'live',
     audience: 'Family & juniors',
-    reach: 12400,
+    reach: 3200,
     engagement: 31.2,
-    conversions: 1420,
-    revenue: 28400,
-    roi: 4.1,
+    conversions: 280,
+    revenue: 5600,
+    roi: 3.6,
     goal: 'Membership',
   },
   {
@@ -35,11 +37,11 @@ export const campaigns = [
     channel: 'Email',
     status: 'live',
     audience: 'Lapsed supporters',
-    reach: 7640,
+    reach: 3400,
     engagement: 18.9,
-    conversions: 612,
-    revenue: 11200,
-    roi: 3.4,
+    conversions: 190,
+    revenue: 3400,
+    roi: 3.1,
     goal: 'Reactivation',
   },
   {
@@ -48,9 +50,9 @@ export const campaigns = [
     channel: 'Social',
     status: 'live',
     audience: 'Digital-first followers',
-    reach: 186000,
+    reach: 42000,
     engagement: 8.7,
-    conversions: 940,
+    conversions: 210,
     revenue: 0,
     roi: null,
     goal: 'Awareness & growth',
@@ -61,11 +63,11 @@ export const campaigns = [
     channel: 'Email + Web',
     status: 'completed',
     audience: 'Superfans, Regulars',
-    reach: 9200,
+    reach: 1900,
     engagement: 42.1,
-    conversions: 6840,
-    revenue: 512000,
-    roi: 18.7,
+    conversions: 520,
+    revenue: 44200,
+    roi: 12.4,
     goal: 'Renewals',
   },
   {
@@ -74,11 +76,11 @@ export const campaigns = [
     channel: 'App',
     status: 'completed',
     audience: 'Match attendees',
-    reach: 14300,
+    reach: 2300,
     engagement: 56.4,
-    conversions: 8060,
-    revenue: 186000,
-    roi: 9.9,
+    conversions: 1480,
+    revenue: 14200,
+    roi: 6.8,
     goal: 'In-app spend',
   },
   {
@@ -96,13 +98,14 @@ export const campaigns = [
   },
 ]
 
-// Performance by platform (this season)
+// Performance by platform (this season). reach in 000s (impressions),
+// followers in 000s — social followers total ~31.5k.
 export const platformPerformance = [
-  { platform: 'Instagram', reach: 142, engagement: 7.9, followers: 96 },
-  { platform: 'TikTok', reach: 218, engagement: 11.2, followers: 61 },
-  { platform: 'Facebook', reach: 88, engagement: 3.4, followers: 34 },
-  { platform: 'X', reach: 54, engagement: 2.8, followers: 13 },
-  { platform: 'Email', reach: 39, engagement: 38.4, followers: 40 },
+  { platform: 'Instagram', reach: 62, engagement: 7.9, followers: 14 },
+  { platform: 'TikTok', reach: 88, engagement: 11.2, followers: 9 },
+  { platform: 'Facebook', reach: 26, engagement: 3.4, followers: 5 },
+  { platform: 'X', reach: 15, engagement: 2.8, followers: 3 },
+  { platform: 'Email', reach: 14, engagement: 38.4, followers: 14 },
 ]
 
 // Content type engagement (avg engagement rate %)
@@ -115,10 +118,10 @@ export const contentTypes = [
   { type: 'Sponsor / commercial', value: 2.9 },
 ]
 
-// Email campaign funnel (last major send)
+// Email campaign funnel (last major send) — ~14,200 subscribers
 export const emailFunnel = [
-  { stage: 'Delivered', value: 39100 },
-  { stage: 'Opened', value: 15020 },
-  { stage: 'Clicked', value: 4180 },
-  { stage: 'Converted', value: 1240 },
+  { stage: 'Delivered', value: 13800 },
+  { stage: 'Opened', value: 5300 },
+  { stage: 'Clicked', value: 1460 },
+  { stage: 'Converted', value: 420 },
 ]

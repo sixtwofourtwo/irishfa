@@ -1,13 +1,26 @@
 // ---------------------------------------------------------------------------
 // Executive overview KPIs and cross-source trend series.
 // Illustrative prototype data for the IFA Women's Senior Team.
+//
+// SCALE MODEL — numbers are deliberately grounded in the REAL attendance data
+// (see src/data/matchHistory.js). Recent home crowds average ~2,000 at NI
+// grounds, with ~11,900 distinct attendees across the last two seasons. The
+// wider figures are scaled to be consistent with that reality:
+//   • ~21,500 total identified fan profiles (attendees + digital followers +
+//     email subscribers + registered accounts, de-duplicated)
+//   • ~11,900 have ever attended a match; ~7,350 engage in a given month
+//   • ~31,500 social followers (reach can exceed identified profiles)
+//   • ~£308k season fan revenue (from ~£150k ticketing at realistic yields,
+//     plus retail, F&B, memberships and hospitality)
+// These are illustrative but proportionate — no more "48k fans / £2.7m" for a
+// team that draws ~2,000 a game.
 // ---------------------------------------------------------------------------
 
 export const kpis = [
   {
     id: 'fans',
     label: 'Unified fan profiles',
-    value: '48,420',
+    value: '21,500',
     icon: 'Users',
     delta: 6.4,
     deltaDir: 'up',
@@ -16,16 +29,16 @@ export const kpis = [
   {
     id: 'engaged',
     label: 'Monthly active fans',
-    value: '19,880',
+    value: '7,350',
     icon: 'Activity',
     delta: 9.1,
     deltaDir: 'up',
-    sub: '41% of the fan base',
+    sub: '34% of the fan base',
   },
   {
     id: 'revenue',
     label: 'Fan revenue (season)',
-    value: '£2.71m',
+    value: '£308k',
     icon: 'PoundSterling',
     delta: 14.2,
     deltaDir: 'up',
@@ -42,12 +55,12 @@ export const kpis = [
 ]
 
 // Retention metrics — the "second-match" challenge that is the core job of the
-// Fan Engagement Manager. Figures are attendee-level (not the whole fanbase).
+// Fan Engagement Manager. Figures are attendee-level (of ~11,900 attendees).
 export const retentionMetrics = [
   {
     id: 'returning',
     label: 'Returning fans',
-    value: '1,148',
+    value: '2,180',
     icon: 'Repeat',
     delta: 8.3,
     deltaDir: 'up',
@@ -75,62 +88,63 @@ export const genderSplit = [
 export const secondaryKpis = [
   { label: 'Avg. engagement score', value: '62', suffix: '/100', delta: 3.0, deltaDir: 'up' },
   { label: 'Email open rate', value: '38.4', suffix: '%', delta: 2.1, deltaDir: 'up' },
-  { label: 'Social followers', value: '204k', suffix: '', delta: 11.8, deltaDir: 'up' },
-  { label: 'Lapsed fans', value: '7,640', suffix: '', delta: 4.4, deltaDir: 'down' },
-  { label: 'Avg. spend / attendee', value: '£23.10', suffix: '', delta: 5.6, deltaDir: 'up' },
+  { label: 'Social followers', value: '31.5k', suffix: '', delta: 11.8, deltaDir: 'up' },
+  { label: 'Lapsed fans', value: '3,400', suffix: '', delta: 4.4, deltaDir: 'down' },
+  { label: 'Avg. spend / attendee', value: '£8.40', suffix: '', delta: 5.6, deltaDir: 'up' },
   { label: 'Net promoter score', value: '+48', suffix: '', delta: 6.0, deltaDir: 'up' },
 ]
 
-// Monthly cross-platform engagement (12 months). Values are indexed fan touchpoints (000s).
+// Monthly cross-platform engagement (12 months). Values are fan touchpoints
+// (000s) — total ~170k/month, social-led, consistent with ~31.5k followers.
 export const engagementTrend = [
-  { month: 'Sep', app: 22, social: 61, email: 18, web: 27 },
-  { month: 'Oct', app: 26, social: 66, email: 19, web: 29 },
-  { month: 'Nov', app: 31, social: 72, email: 21, web: 33 },
-  { month: 'Dec', app: 24, social: 58, email: 17, web: 25 },
-  { month: 'Jan', app: 28, social: 69, email: 22, web: 31 },
-  { month: 'Feb', app: 34, social: 78, email: 24, web: 36 },
-  { month: 'Mar', app: 41, social: 92, email: 27, web: 44 },
-  { month: 'Apr', app: 38, social: 85, email: 25, web: 40 },
-  { month: 'May', app: 47, social: 104, email: 29, web: 49 },
-  { month: 'Jun', app: 52, social: 121, email: 31, web: 55 },
-  { month: 'Jul', app: 44, social: 98, email: 28, web: 46 },
-  { month: 'Aug', app: 58, social: 132, email: 33, web: 61 },
+  { month: 'Sep', app: 13, social: 38, email: 11, web: 17 },
+  { month: 'Oct', app: 15, social: 41, email: 12, web: 18 },
+  { month: 'Nov', app: 18, social: 45, email: 13, web: 20 },
+  { month: 'Dec', app: 14, social: 36, email: 10, web: 15 },
+  { month: 'Jan', app: 17, social: 43, email: 13, web: 19 },
+  { month: 'Feb', app: 20, social: 49, email: 14, web: 22 },
+  { month: 'Mar', app: 25, social: 58, email: 16, web: 27 },
+  { month: 'Apr', app: 23, social: 53, email: 15, web: 25 },
+  { month: 'May', app: 28, social: 64, email: 17, web: 30 },
+  { month: 'Jun', app: 31, social: 72, email: 18, web: 33 },
+  { month: 'Jul', app: 26, social: 60, email: 16, web: 28 },
+  { month: 'Aug', app: 34, social: 79, email: 20, web: 37 },
 ]
 
 // Fan base growth (unified profiles, 000s)
 export const growthTrend = [
-  { month: 'Sep', fans: 39.1, active: 14.2 },
-  { month: 'Oct', fans: 40.3, active: 15.0 },
-  { month: 'Nov', fans: 41.8, active: 16.1 },
-  { month: 'Dec', fans: 42.4, active: 15.3 },
-  { month: 'Jan', fans: 43.6, active: 16.8 },
-  { month: 'Feb', fans: 44.5, active: 17.4 },
-  { month: 'Mar', fans: 45.7, active: 18.6 },
-  { month: 'Apr', fans: 46.2, active: 18.1 },
-  { month: 'May', fans: 46.9, active: 19.0 },
-  { month: 'Jun', fans: 47.6, active: 19.5 },
-  { month: 'Jul', fans: 48.0, active: 19.2 },
-  { month: 'Aug', fans: 48.4, active: 19.9 },
+  { month: 'Sep', fans: 17.4, active: 6.1 },
+  { month: 'Oct', fans: 17.9, active: 6.3 },
+  { month: 'Nov', fans: 18.5, active: 6.6 },
+  { month: 'Dec', fans: 19.0, active: 6.2 },
+  { month: 'Jan', fans: 19.5, active: 6.8 },
+  { month: 'Feb', fans: 19.9, active: 7.0 },
+  { month: 'Mar', fans: 20.4, active: 7.2 },
+  { month: 'Apr', fans: 20.7, active: 7.0 },
+  { month: 'May', fans: 21.0, active: 7.2 },
+  { month: 'Jun', fans: 21.2, active: 7.3 },
+  { month: 'Jul', fans: 21.4, active: 7.1 },
+  { month: 'Aug', fans: 21.5, active: 7.35 },
 ]
 
 // Where engaged fans reach us (share of touchpoints)
 export const channelMix = [
-  { name: 'Social media', value: 44, color: 'var(--series-7)' },
-  { name: 'Stadium app', value: 22, color: 'var(--series-6)' },
-  { name: 'Website', value: 18, color: 'var(--series-2)' },
-  { name: 'Email', value: 11, color: 'var(--series-4)' },
-  { name: 'Ticketing', value: 5, color: 'var(--series-1)' },
+  { name: 'Social media', value: 46, color: 'var(--series-7)' },
+  { name: 'Website', value: 21, color: 'var(--series-2)' },
+  { name: 'Stadium app', value: 20, color: 'var(--series-6)' },
+  { name: 'Email', value: 9, color: 'var(--series-4)' },
+  { name: 'Ticketing', value: 4, color: 'var(--series-1)' },
 ]
 
-// Fan location (Northern Ireland + reach)
+// Fan location (Northern Ireland + reach) — sums to ~21,500 unified profiles.
 export const fanGeography = [
-  { area: 'Belfast', fans: 16240 },
-  { area: 'Lisburn & Castlereagh', fans: 5120 },
-  { area: 'Newtownabbey', fans: 3980 },
-  { area: 'Ards & North Down', fans: 4610 },
-  { area: 'Mid Ulster', fans: 3240 },
-  { area: 'Derry & Strabane', fans: 3860 },
-  { area: 'Armagh & Craigavon', fans: 4020 },
-  { area: 'Rest of UK / ROI', fans: 5120 },
-  { area: 'International', fans: 2230 },
+  { area: 'Belfast', fans: 7200 },
+  { area: 'Lisburn & Castlereagh', fans: 2270 },
+  { area: 'Newtownabbey', fans: 1760 },
+  { area: 'Ards & North Down', fans: 2050 },
+  { area: 'Mid Ulster', fans: 1440 },
+  { area: 'Derry & Strabane', fans: 1710 },
+  { area: 'Armagh & Craigavon', fans: 1780 },
+  { area: 'Rest of UK / ROI', fans: 2270 },
+  { area: 'International', fans: 990 },
 ]

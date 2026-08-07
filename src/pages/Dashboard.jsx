@@ -81,7 +81,7 @@ export default function Dashboard() {
         </Card>
 
         <Card title="Where fans reach us" subtitle="Share of all touchpoints">
-          <Donut data={channelMix} centerValue="1.34m" centerLabel="touchpoints / mo" />
+          <Donut data={channelMix} centerValue="170k" centerLabel="touchpoints / mo" />
           <div className="mt-16">
             <Legend items={channelMix.map((c) => ({ label: `${c.name} · ${c.value}%`, color: c.color }))} />
           </div>
@@ -147,7 +147,7 @@ export default function Dashboard() {
         </Card>
 
         <Card title="Fanbase by gender" subtitle="Men attend the women's team too">
-          <Donut data={genderSplit} centerValue="48.4k" centerLabel="fans" suffix="%" height={220} />
+          <Donut data={genderSplit} centerValue="21.5k" centerLabel="fans" suffix="%" height={220} />
           <div className="mt-16">
             <Legend items={genderSplit.map((g) => ({ label: `${g.name} · ${g.value}%`, color: g.color }))} />
           </div>
@@ -163,7 +163,7 @@ export default function Dashboard() {
           <div className="divider" />
           <div className="grid cols-3" style={{ gap: 12 }}>
             <Metric value="7" label="sources unified" />
-            <Metric value="48.4k" label="fan profiles" />
+            <Metric value="21.5k" label="fan profiles" />
             <Metric value="78%" label="identity match" />
           </div>
           <div className="mt-16">

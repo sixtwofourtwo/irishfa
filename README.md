@@ -17,6 +17,12 @@ Technology & Innovation), addressing the challenge of
 > credentials, commercial agreements and GDPR/data-sharing controls that sit
 > outside the scope of a prototype.
 >
+> **The illustrative figures are scaled to the real attendance data** so they stay
+> proportionate: recent home crowds average ~2,000, so the model uses ~21,500
+> total fan profiles, ~11,900 known attendees and ~£308k season fan revenue —
+> not the inflated placeholders an early draft carried. The scaling assumptions
+> are documented at the top of `src/data/overview.js`.
+>
 > **One dataset is real:** the **Match-day & Attendance** screen is powered by an
 > actual IFA record of 73 Northern Ireland Women's Senior Team fixtures
 > (2017–2026) — real dates, competitions, venues, capacities, attendances and

@@ -66,7 +66,7 @@ export default function Segments() {
         </Card>
 
         <Card title="Fanbase split" subtitle="Lifecycle segment mix">
-          <Donut data={donut} centerValue="48.4k" centerLabel="total fans" suffix="" />
+          <Donut data={donut} centerValue="21.5k" centerLabel="total fans" suffix="" />
         </Card>
       </div>
 
@@ -119,7 +119,7 @@ export default function Segments() {
               <div style={{ fontSize: 20, fontWeight: 800 }}>{sel.engagement}/100</div>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <div className="muted small">Avg. lifetime value</div>
+              <div className="muted small">Avg. season value</div>
               <div style={{ fontSize: 20, fontWeight: 800 }}>£{sel.avgValue}</div>
             </div>
           </div>
