@@ -26,7 +26,7 @@ export default function Dashboard() {
   return (
     <>
       <PageHeader
-        title="Fanbase Overview Dashboard"
+        title="Fanbase Overview"
         subtitle="A single, consolidated view of supporter data for the IFA Women's Senior Team — unifying the stadium app, ticketing, Opta, social, email and operational systems."
       >
         <span className="badge info" title="Data sources connected">

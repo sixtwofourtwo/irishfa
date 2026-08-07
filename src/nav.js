@@ -5,7 +5,7 @@ export const nav = [
   {
     section: 'Overview',
     items: [
-      { to: '/', label: 'Fanbase Overview Dashboard', icon: 'LayoutDashboard', end: true },
+      { to: '/', label: 'Fanbase Overview', icon: 'LayoutDashboard', end: true },
       { to: '/alerts', label: 'Alerts & Insights', icon: 'Bell', badge: alertCounts.total },
     ],
   },
