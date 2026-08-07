@@ -78,86 +78,76 @@ export default function Matches() {
         </Card>
       </div>
 
-      {/* HOME VENUES — the assortment-of-venues story */}
+      {/* HOME VENUES — map + figures side by side (one screenful) */}
       <div className="section-title">Home venues — where NI Women play across Northern Ireland</div>
       <div className="grid cols-3">
         <Card
           title="Home grounds map"
-          subtitle="Bubble size = average attendance · colour = how full the ground is on average"
-          className="span-2"
+          subtitle="Size = avg attendance · colour = utilisation"
         >
           <VenueMap venues={venuesRanked} />
         </Card>
 
-        <Card title="Why venue context matters" subtitle="For a fan intelligence platform">
-          <p className="small" style={{ color: 'var(--ink-2)', lineHeight: 1.55 }}>
-            Home games move between <strong>{distinctHomeGrounds} grounds</strong> — from Windsor Park
-            (avg ~5,500) to Shamrock Park (avg ~530) — so a fan's travel distance, ticket access and
-            match-day experience change every fixture.
-          </p>
-          <div className="divider" />
-          <ul style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <VenuePoint text="Average crowds fill only 7–42% of capacity — clear headroom to grow attendance." />
-            <VenuePoint text="Regional fans can be targeted when a fixture comes to a ground near them." />
-            <VenuePoint text="Capacity vs demand informs which ground suits each opponent and competition." />
-          </ul>
+        <Card
+          className="span-2"
+          title="Average attendance & how full each ground is"
+          subtitle={`Real data · home games rotate across ${distinctHomeGrounds} grounds; average crowds fill just 7–42% of capacity`}
+          bodyClass="tight"
+        >
+          <div className="table-wrap">
+            <table className="data">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Venue</th>
+                  <th className="num">Games</th>
+                  <th className="num">Avg. att.</th>
+                  <th className="num">Best att.</th>
+                  <th className="num">Capacity</th>
+                  <th>Avg. vs capacity</th>
+                </tr>
+              </thead>
+              <tbody>
+                {venuesRanked.map((v) => (
+                  <tr key={v.venue}>
+                    <td>
+                      <span style={{
+                        display: 'inline-grid', placeItems: 'center', width: 22, height: 22,
+                        borderRadius: '50%', background: 'var(--brand-050)', color: 'var(--brand-700)',
+                        fontSize: 11, fontWeight: 700,
+                      }}>{v.rank}</span>
+                    </td>
+                    <td>
+                      <div style={{ fontWeight: 600 }}>{v.venue}</div>
+                      <div className="muted small">{v.city}{v.club ? ` · ${v.club}` : ''}</div>
+                    </td>
+                    <td className="num">{v.games}</td>
+                    <td className="num" style={{ fontWeight: 700 }}>{v.avg ? v.avg.toLocaleString() : '—'}</td>
+                    <td className="num">{v.best ? v.best.toLocaleString() : '—'}</td>
+                    <td className="num muted">{v.capacity ? v.capacity.toLocaleString() : '—'}</td>
+                    <td style={{ minWidth: 130 }}>
+                      {v.avgUtil != null ? (
+                        <div className="flex items-center gap-8">
+                          <span className="meter" style={{ flex: 1 }}>
+                            <span style={{ width: `${v.avgUtil}%`, background: utilColor(v.avgUtil) }} />
+                          </span>
+                          <span style={{ width: 32, textAlign: 'right', fontWeight: 600 }}>{v.avgUtil}%</span>
+                        </div>
+                      ) : (
+                        <span className="muted small">n/a</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="card__foot">
+            "Avg. vs capacity" = average attendance ÷ published capacity. Inver Park capacity was not in
+            the supplied dataset (shown n/a).
+          </div>
         </Card>
       </div>
-
-      {/* Venue table with average utilisation */}
-      <Card className="mt-16" bodyClass="tight">
-        <div className="table-wrap">
-          <table className="data">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Venue</th>
-                <th>Location</th>
-                <th className="num">Games</th>
-                <th className="num">Avg. att.</th>
-                <th className="num">Best att.</th>
-                <th className="num">Capacity</th>
-                <th>Avg. vs capacity</th>
-              </tr>
-            </thead>
-            <tbody>
-              {venuesRanked.map((v) => (
-                <tr key={v.venue}>
-                  <td>
-                    <span style={{
-                      display: 'inline-grid', placeItems: 'center', width: 22, height: 22,
-                      borderRadius: '50%', background: 'var(--brand-050)', color: 'var(--brand-700)',
-                      fontSize: 11, fontWeight: 700,
-                    }}>{v.rank}</span>
-                  </td>
-                  <td style={{ fontWeight: 600 }}>{v.venue}</td>
-                  <td className="muted small">{v.city}{v.club ? ` · ${v.club}` : ''}</td>
-                  <td className="num">{v.games}</td>
-                  <td className="num" style={{ fontWeight: 600 }}>{v.avg ? v.avg.toLocaleString() : '—'}</td>
-                  <td className="num">{v.best ? v.best.toLocaleString() : '—'}</td>
-                  <td className="num muted">{v.capacity ? v.capacity.toLocaleString() : '—'}</td>
-                  <td style={{ minWidth: 150 }}>
-                    {v.avgUtil != null ? (
-                      <div className="flex items-center gap-8">
-                        <span className="meter" style={{ flex: 1 }}>
-                          <span style={{ width: `${v.avgUtil}%`, background: utilColor(v.avgUtil) }} />
-                        </span>
-                        <span style={{ width: 34, textAlign: 'right', fontWeight: 600 }}>{v.avgUtil}%</span>
-                      </div>
-                    ) : (
-                      <span className="muted small">n/a</span>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="card__foot">
-          "Avg. vs capacity" = average attendance ÷ published capacity. Capacity for Inver Park was not
-          included in the supplied dataset, so its utilisation is shown as n/a.
-        </div>
-      </Card>
 
       {/* Biggest crowds */}
       <div className="grid cols-3 mt-16">
@@ -251,15 +241,6 @@ export default function Matches() {
         </div>
       </Card>
     </>
-  )
-}
-
-function VenuePoint({ text }) {
-  return (
-    <li className="flex gap-8" style={{ fontSize: 12.5, color: 'var(--ink-2)', lineHeight: 1.45 }}>
-      <MapPin size={14} style={{ flexShrink: 0, marginTop: 2, color: 'var(--brand-600)' }} />
-      {text}
-    </li>
   )
 }
 
