@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { MapPin, TrendingUp, Trophy, Database, Zap } from 'lucide-react'
-import { PageHeader, Card, Badge, StatTile } from '../components/ui.jsx'
-import { AreaTrend, BarsV } from '../components/charts.jsx'
+import { PageHeader, Card, Badge, StatTile, Legend } from '../components/ui.jsx'
+import { LineTrend, BarsV } from '../components/charts.jsx'
 import { SERIES, BRAND } from '../theme.js'
 import { matchHistory } from '../data/matchHistory.js'
 import {
@@ -23,7 +23,11 @@ export default function Matches() {
       .reverse()
   }, [season, side])
 
-  const attData = homeAttBySeason.map((s) => ({ x: s.season, avg: s.avg }))
+  const attData = homeAttBySeason.map((s) => ({ x: s.season, avg: s.avg, peak: s.max }))
+  const attKeys = [
+    { key: 'peak', label: 'Season best (single game)', color: SERIES[1] },
+    { key: 'avg', label: 'Season average', color: BRAND[600] },
+  ]
   const resultData = attByResult.map((r) => ({ x: r.result, avg: r.avg }))
 
   return (
@@ -47,13 +51,21 @@ export default function Matches() {
       <div className="grid cols-3 mt-16">
         <Card
           title="Home attendance growth"
-          subtitle="Avg. attendance at NI home grounds, by season (real)"
+          subtitle="Average and best crowd at NI home grounds, by season (real)"
           className="span-2"
+          action={<Legend items={attKeys.map((k) => ({ label: k.label, color: k.color }))} />}
         >
-          <AreaTrend data={attData} dataKey="avg" name="Avg. home attendance" height={260} />
-          <div className="badge good" style={{ marginTop: 6 }}>
-            <TrendingUp size={13} /> From ~600 (2017/18) to a 30,785 peak at Euro 2022
+          <LineTrend data={attData} keys={attKeys} height={250} />
+          <div className="flex gap-8 wrap items-center" style={{ marginTop: 8 }}>
+            <span className="badge good">
+              <TrendingUp size={13} /> Average up from ~600 (2017/18); Windsor Park qualifier peaked at 15,348
+            </span>
           </div>
+          <p className="small muted" style={{ marginTop: 8, lineHeight: 1.45 }}>
+            This trend covers NI home grounds only. The all-time record of 30,785 (Euro 2022 vs England) was
+            played at a neutral tournament venue in England, so it sits outside this home-ground series — see
+            "Record crowds" below.
+          </p>
         </Card>
 
         <Card title="Attendance by result" subtitle="Avg. home crowd (real)">
