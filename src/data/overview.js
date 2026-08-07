@@ -41,6 +41,37 @@ export const kpis = [
   },
 ]
 
+// Retention metrics — the "second-match" challenge that is the core job of the
+// Fan Engagement Manager. Figures are attendee-level (not the whole fanbase).
+export const retentionMetrics = [
+  {
+    id: 'returning',
+    label: 'Returning fans',
+    value: '1,148',
+    icon: 'Repeat',
+    delta: 8.3,
+    deltaDir: 'up',
+    sub: 'attended 2 or more matches',
+    tone: 'good',
+  },
+  {
+    id: 'at-risk',
+    label: 'At risk of dropping off',
+    value: '203',
+    icon: 'UserMinus',
+    sub: 'first match < 60 days ago, no return yet',
+    tone: 'warn',
+  },
+]
+
+// Fanbase by gender — men attend the Women's Senior Team's games too, and the
+// platform captures this. Illustrative split.
+export const genderSplit = [
+  { name: 'Female', value: 58, color: '#e87ba4' },
+  { name: 'Male', value: 39, color: '#2a78d6' },
+  { name: 'Undisclosed', value: 3, color: '#b9c0bb' },
+]
+
 export const secondaryKpis = [
   { label: 'Avg. engagement score', value: '62', suffix: '/100', delta: 3.0, deltaDir: 'up' },
   { label: 'Email open rate', value: '38.4', suffix: '%', delta: 2.1, deltaDir: 'up' },

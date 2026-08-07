@@ -10,7 +10,7 @@ export default function Sidebar({ open, onClose }) {
           <Icons.ShieldCheck size={22} color="#fff" />
         </div>
         <div>
-          <h1>Fan Intelligence</h1>
+          <h1>Fan Intelligence Platform</h1>
           <span>Irish FA · Women's Senior Team</span>
         </div>
       </div>

@@ -46,10 +46,10 @@ be consolidated into one unified fan record.
 
 ## Modules (screens)
 
-- **Executive Dashboard** — cross-source KPIs, engagement & the consolidation story
+- **Fanbase Overview Dashboard** — cross-source KPIs, a **retention "second-match" band** (returning fans, at-risk fans), engagement, gender split & the consolidation story
 - **Alerts & Insights** — auto-surfaced opportunities and risks
-- **Fan 360 Profiles** — every supporter as one unified record, with a full activity timeline
-- **Segmentation** — behavioural audiences for personalised targeting
+- **Fan Segmentation** — attendee personas (Families, Young Female Fans, Group & Club Bookers) and lifecycle segments, each linking to its fans
+- **Fan 360 Profiles** — every supporter (female *and* male) as one unified record, filterable by segment and retention status, with a "What do we know about this fan?" view, activity timeline and next-best-action
 - **Campaigns & Content** — cross-platform activity, personalisation & performance
 - **Match-day / Opta** — on-pitch data joined to fan behaviour
 - **Revenue & Monetisation** — consolidated commercial view by stream & segment

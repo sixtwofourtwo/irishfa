@@ -5,15 +5,15 @@ export const nav = [
   {
     section: 'Overview',
     items: [
-      { to: '/', label: 'Executive Dashboard', icon: 'LayoutDashboard', end: true },
+      { to: '/', label: 'Fanbase Overview Dashboard', icon: 'LayoutDashboard', end: true },
       { to: '/alerts', label: 'Alerts & Insights', icon: 'Bell', badge: alertCounts.total },
     ],
   },
   {
     section: 'Fans',
     items: [
+      { to: '/segments', label: 'Fan Segmentation', icon: 'PieChart' },
       { to: '/fans', label: 'Fan 360 Profiles', icon: 'Users' },
-      { to: '/segments', label: 'Segmentation', icon: 'PieChart' },
     ],
   },
   {

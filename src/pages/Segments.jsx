@@ -1,24 +1,28 @@
 import { useState } from 'react'
-import { Users, ArrowUpRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Users, ArrowUpRight, ArrowRight } from 'lucide-react'
 import { PageHeader, Card, Delta, Legend } from '../components/ui.jsx'
 import { BarsV, Donut } from '../components/charts.jsx'
-import { SERIES } from '../theme.js'
+import { SERIES, BRAND } from '../theme.js'
 import { segments, segmentTrend } from '../data/segments.js'
 
 const trendKeys = [
   { key: 'Superfans', label: 'Superfans', color: SERIES[6] },
   { key: 'Committed regulars', label: 'Committed regulars', color: SERIES[1] },
-  { key: 'Family & juniors', label: 'Family & juniors', color: SERIES[3] },
+  { key: 'Family & juniors', label: 'Family & juniors', color: SERIES[4] },
   { key: 'Digital-first', label: 'Digital-first', color: SERIES[7] },
-  { key: 'Lapsed', label: 'Lapsed', color: SERIES[4] },
-  { key: 'New', label: 'New', color: SERIES[2] },
+  { key: 'Lapsed', label: 'Lapsed', color: SERIES[8] },
+  { key: 'New', label: 'New', color: BRAND[600] },
 ]
 
 export default function Segments() {
   const [active, setActive] = useState(segments[0].id)
   const sel = segments.find((s) => s.id === active)
   const trendData = segmentTrend.map((d) => ({ x: d.month, ...d }))
-  const donut = segments.map((s) => ({ name: s.name, value: s.size, color: cssToHex(s.color) }))
+
+  const attendee = segments.filter((s) => s.group === 'attendee')
+  const lifecycle = segments.filter((s) => s.group === 'lifecycle')
+  const donut = lifecycle.map((s) => ({ name: s.name, value: s.size, color: cssToHex(s.color) }))
 
   const channels = [
     { label: 'Stadium app', v: sel.channels.app },
@@ -30,51 +34,30 @@ export default function Segments() {
   return (
     <>
       <PageHeader
-        title="Segmentation & Audiences"
-        subtitle="Behavioural segments derived automatically from the unified fan record — the foundation for personalised, cross-platform targeting."
+        title="Fan Segmentation"
+        subtitle="Behavioural segments derived from the unified fan record — the foundation for personalised, cross-platform targeting. Click a segment to explore it, or jump straight to its fans."
       />
 
-      {/* Segment cards */}
+      {/* Attendee personas — the retention focus */}
+      <div className="section-title" style={{ marginTop: 0 }}>Attendee personas — who actually comes to games</div>
       <div className="grid cols-3">
-        {segments.map((s) => (
-          <button
-            key={s.id}
-            className="card"
-            onClick={() => setActive(s.id)}
-            style={{
-              textAlign: 'left', cursor: 'pointer', padding: 0,
-              outline: active === s.id ? '2px solid var(--brand-500)' : 'none',
-            }}
-          >
-            <div className="card__body">
-              <div className="flex between items-center">
-                <span className="flex items-center gap-8" style={{ fontWeight: 700, fontSize: 14.5 }}>
-                  <span style={{ width: 11, height: 11, borderRadius: 3, background: cssToHex(s.color) }} />
-                  {s.name}
-                </span>
-                <Delta value={s.trend} dir={s.trendDir} />
-              </div>
-              <div className="flex between items-baseline mt-16">
-                <div>
-                  <div style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.02em' }}>
-                    {s.size.toLocaleString()}
-                  </div>
-                  <div className="muted small">{s.share}% of fan base</div>
-                </div>
-                <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontSize: 16, fontWeight: 700 }}>£{s.avgValue}</div>
-                  <div className="muted small">avg. value</div>
-                </div>
-              </div>
-            </div>
-          </button>
+        {attendee.map((s) => (
+          <SegmentCard key={s.id} s={s} active={active === s.id} onSelect={() => setActive(s.id)} />
+        ))}
+      </div>
+
+      {/* Lifecycle segments */}
+      <div className="section-title">Lifecycle segments — the wider fanbase</div>
+      <div className="grid cols-3">
+        {lifecycle.map((s) => (
+          <SegmentCard key={s.id} s={s} active={active === s.id} onSelect={() => setActive(s.id)} />
         ))}
       </div>
 
       {/* Trend + composition */}
       <div className="grid cols-3 mt-16">
         <Card
-          title="Segment composition over the season"
+          title="Lifecycle composition over the season"
           subtitle="Fans per segment (stacked)"
           className="span-2"
           action={<Legend items={trendKeys.map((k) => ({ label: k.label, color: k.color }))} />}
@@ -82,7 +65,7 @@ export default function Segments() {
           <BarsV data={trendData} keys={trendKeys} stacked height={300} />
         </Card>
 
-        <Card title="Fan base split" subtitle="Current segment mix">
+        <Card title="Fanbase split" subtitle="Lifecycle segment mix">
           <Donut data={donut} centerValue="48.4k" centerLabel="total fans" suffix="" />
         </Card>
       </div>
@@ -91,7 +74,7 @@ export default function Segments() {
       <div className="section-title">Segment detail — {sel.name}</div>
       <div className="grid cols-3">
         <Card className="span-2">
-          <div className="flex items-center gap-8" style={{ marginBottom: 10 }}>
+          <div className="flex items-center gap-8 wrap" style={{ marginBottom: 10 }}>
             <span style={{ width: 13, height: 13, borderRadius: 4, background: cssToHex(sel.color) }} />
             <h3 style={{ fontSize: 16, fontWeight: 700 }}>{sel.name}</h3>
             <span className="badge gray">{sel.size.toLocaleString()} fans</span>
@@ -107,9 +90,12 @@ export default function Segments() {
             ))}
           </div>
 
-          <div className="mt-24">
-            <button className="btn primary sm">
-              <Users size={14} /> Build audience for campaign <ArrowUpRight size={14} />
+          <div className="mt-24 flex gap-8 wrap">
+            <Link to={`/fans?segment=${sel.id}`} className="btn primary sm">
+              <Users size={14} /> View fans in this segment <ArrowRight size={14} />
+            </Link>
+            <button className="btn sm">
+              Build audience for campaign <ArrowUpRight size={14} />
             </button>
           </div>
         </Card>
@@ -143,12 +129,60 @@ export default function Segments() {
   )
 }
 
+function SegmentCard({ s, active, onSelect }) {
+  return (
+    <div
+      className="card"
+      onClick={onSelect}
+      style={{ cursor: 'pointer', outline: active ? '2px solid var(--brand-500)' : 'none' }}
+    >
+      <div className="card__body">
+        <div className="flex between items-center">
+          <span className="flex items-center gap-8" style={{ fontWeight: 700, fontSize: 14.5 }}>
+            <span style={{ width: 11, height: 11, borderRadius: 3, background: cssToHex(s.color) }} />
+            {s.name}
+          </span>
+          <Delta value={s.trend} dir={s.trendDir} />
+        </div>
+
+        <p className="small" style={{ color: 'var(--ink-2)', lineHeight: 1.45, margin: '10px 0 0' }}>
+          {s.short}
+        </p>
+
+        <div className="flex between items-baseline mt-16">
+          <div>
+            <div style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.02em' }}>
+              {s.size.toLocaleString()}
+            </div>
+            <div className="muted small">{s.share ? `${s.share}% of fan base` : 'match-going fans'}</div>
+          </div>
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ fontSize: 16, fontWeight: 700 }}>£{s.avgValue}</div>
+            <div className="muted small">avg. value</div>
+          </div>
+        </div>
+
+        <div className="divider" />
+        <Link
+          to={`/fans?segment=${s.id}`}
+          className="flex items-center gap-8"
+          style={{ fontSize: 12.5, fontWeight: 600, color: 'var(--brand-700)' }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          View fans in this segment <ArrowRight size={14} />
+        </Link>
+      </div>
+    </div>
+  )
+}
+
 // Segment colours are stored as CSS var references; map to hex for inline SVG/legends.
 function cssToHex(v) {
   const map = {
     'var(--series-1)': SERIES[1], 'var(--series-2)': SERIES[2], 'var(--series-3)': SERIES[3],
     'var(--series-4)': SERIES[4], 'var(--series-5)': SERIES[5], 'var(--series-6)': SERIES[6],
     'var(--series-7)': SERIES[7], 'var(--series-8)': SERIES[8],
+    'var(--brand-600)': BRAND[600],
   }
   return map[v] || v
 }
