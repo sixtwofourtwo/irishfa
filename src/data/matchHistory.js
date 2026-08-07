@@ -8,30 +8,26 @@
 
 export const NI_GROUNDS = ["Inver Park", "Mourneview Park", "National Stadium at Windsor Park", "Seaview", "Shamrock Park", "The Ballymena Showgrounds"]
 
+// city/club plus approximate map coordinates (x,y) in the 0–340 × 0–270
+// schematic-NI viewBox used by the venue map (VenueMap.jsx).
 export const venueMeta = {
   "Seaview": {
-    "city": "Belfast",
-    "club": "Crusaders FC"
+    "city": "Belfast", "club": "Crusaders FC", "x": 251, "y": 140
   },
   "National Stadium at Windsor Park": {
-    "city": "Belfast",
-    "club": "National Stadium"
+    "city": "Belfast", "club": "National Stadium", "x": 246, "y": 160
   },
   "Mourneview Park": {
-    "city": "Lurgan",
-    "club": "Glenavon FC"
+    "city": "Lurgan", "club": "Glenavon FC", "x": 214, "y": 176
   },
   "Shamrock Park": {
-    "city": "Portadown",
-    "club": "Portadown FC"
+    "city": "Portadown", "club": "Portadown FC", "x": 203, "y": 184
   },
   "Inver Park": {
-    "city": "Larne",
-    "club": "Larne FC"
+    "city": "Larne", "club": "Larne FC", "x": 263, "y": 102
   },
   "The Ballymena Showgrounds": {
-    "city": "Ballymena",
-    "club": "Ballymena United FC"
+    "city": "Ballymena", "club": "Ballymena United FC", "x": 222, "y": 100
   }
 }
 

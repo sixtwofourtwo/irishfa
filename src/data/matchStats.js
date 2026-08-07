@@ -51,17 +51,26 @@ export const homeVenues = (() => {
       if (m.capacity) v.capacity = m.capacity
     })
   return Object.values(map)
-    .map((v) => ({
-      ...v,
-      ...(venueMeta[v.venue] || { city: '—', club: '' }),
-      avg: v.att.length ? Math.round(v.att.reduce((a, b) => a + b, 0) / v.att.length) : null,
-      util: v.capacity && v.att.length ? Math.round((Math.max(...v.att) / v.capacity) * 100) : null,
-    }))
-    .sort((a, b) => b.games - a.games)
+    .map((v) => {
+      const avg = v.att.length ? Math.round(v.att.reduce((a, b) => a + b, 0) / v.att.length) : null
+      return {
+        ...v,
+        ...(venueMeta[v.venue] || { city: '—', club: '' }),
+        avg,
+        // Best crowd vs capacity
+        util: v.capacity && v.att.length ? Math.round((Math.max(...v.att) / v.capacity) * 100) : null,
+        // Average crowd vs capacity — "how full, typically"
+        avgUtil: v.capacity && avg ? Math.round((avg / v.capacity) * 100) : null,
+      }
+    })
+    .sort((a, b) => (b.avg || 0) - (a.avg || 0))
 })()
 
 // Count of distinct home grounds actually used across NI
 export const distinctHomeGrounds = homeVenues.length
+
+// Home venues numbered by average attendance, for the map markers + table key.
+export const venuesRanked = homeVenues.map((v, i) => ({ ...v, rank: i + 1 }))
 
 // --- Record crowds (any fixture, home or away) -------------------------------
 export const biggestCrowds = matchHistory

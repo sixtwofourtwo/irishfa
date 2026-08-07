@@ -2,11 +2,12 @@ import { useState, useMemo } from 'react'
 import { MapPin, TrendingUp, Trophy, Database, Zap } from 'lucide-react'
 import { PageHeader, Card, Badge, StatTile, Legend } from '../components/ui.jsx'
 import { LineTrend, BarsV } from '../components/charts.jsx'
+import VenueMap from '../components/VenueMap.jsx'
 import { SERIES, BRAND } from '../theme.js'
 import { matchHistory } from '../data/matchHistory.js'
 import {
-  record, seasons, homeAttBySeason, homeVenues, distinctHomeGrounds,
-  biggestCrowds, recentForm, attByResult,
+  record, seasons, homeAttBySeason, distinctHomeGrounds,
+  venuesRanked, biggestCrowds, recentForm, attByResult,
 } from '../data/matchStats.js'
 
 const resultTone = { W: 'good', D: 'warn', L: 'crit' }
@@ -78,56 +79,85 @@ export default function Matches() {
       </div>
 
       {/* HOME VENUES — the assortment-of-venues story */}
-      <div className="section-title">Home venues — the multi-ground picture</div>
+      <div className="section-title">Home venues — where NI Women play across Northern Ireland</div>
       <div className="grid cols-3">
         <Card
-          title="Where NI Women play at home"
-          subtitle="No single home ground — fixtures rotate across the country"
+          title="Home grounds map"
+          subtitle="Bubble size = average attendance · colour = how full the ground is on average"
           className="span-2"
-          bodyClass="tight"
         >
-          <div className="table-wrap">
-            <table className="data">
-              <thead>
-                <tr>
-                  <th>Venue</th>
-                  <th>Location</th>
-                  <th className="num">Games</th>
-                  <th className="num">Avg. att.</th>
-                  <th className="num">Best att.</th>
-                  <th className="num">Capacity</th>
-                </tr>
-              </thead>
-              <tbody>
-                {homeVenues.map((v) => (
-                  <tr key={v.venue}>
-                    <td style={{ fontWeight: 600 }}>{v.venue}</td>
-                    <td className="muted small">{v.city}{v.club ? ` · ${v.club}` : ''}</td>
-                    <td className="num">{v.games}</td>
-                    <td className="num">{v.avg ? v.avg.toLocaleString() : '—'}</td>
-                    <td className="num" style={{ fontWeight: 600 }}>{v.best ? v.best.toLocaleString() : '—'}</td>
-                    <td className="num muted">{v.capacity ? v.capacity.toLocaleString() : '—'}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <VenueMap venues={venuesRanked} />
         </Card>
 
         <Card title="Why venue context matters" subtitle="For a fan intelligence platform">
           <p className="small" style={{ color: 'var(--ink-2)', lineHeight: 1.55 }}>
-            Because home games move between <strong>{distinctHomeGrounds} grounds</strong> — Seaview,
-            Windsor Park, Mourneview Park and others — a fan's travel distance, ticket access and
+            Home games move between <strong>{distinctHomeGrounds} grounds</strong> — from Windsor Park
+            (avg ~5,500) to Shamrock Park (avg ~530) — so a fan's travel distance, ticket access and
             match-day experience change every fixture.
           </p>
           <div className="divider" />
           <ul style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <VenuePoint text="Attendance is only comparable once normalised for venue capacity and location." />
+            <VenuePoint text="Average crowds fill only 7–42% of capacity — clear headroom to grow attendance." />
             <VenuePoint text="Regional fans can be targeted when a fixture comes to a ground near them." />
             <VenuePoint text="Capacity vs demand informs which ground suits each opponent and competition." />
           </ul>
         </Card>
       </div>
+
+      {/* Venue table with average utilisation */}
+      <Card className="mt-16" bodyClass="tight">
+        <div className="table-wrap">
+          <table className="data">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Venue</th>
+                <th>Location</th>
+                <th className="num">Games</th>
+                <th className="num">Avg. att.</th>
+                <th className="num">Best att.</th>
+                <th className="num">Capacity</th>
+                <th>Avg. vs capacity</th>
+              </tr>
+            </thead>
+            <tbody>
+              {venuesRanked.map((v) => (
+                <tr key={v.venue}>
+                  <td>
+                    <span style={{
+                      display: 'inline-grid', placeItems: 'center', width: 22, height: 22,
+                      borderRadius: '50%', background: 'var(--brand-050)', color: 'var(--brand-700)',
+                      fontSize: 11, fontWeight: 700,
+                    }}>{v.rank}</span>
+                  </td>
+                  <td style={{ fontWeight: 600 }}>{v.venue}</td>
+                  <td className="muted small">{v.city}{v.club ? ` · ${v.club}` : ''}</td>
+                  <td className="num">{v.games}</td>
+                  <td className="num" style={{ fontWeight: 600 }}>{v.avg ? v.avg.toLocaleString() : '—'}</td>
+                  <td className="num">{v.best ? v.best.toLocaleString() : '—'}</td>
+                  <td className="num muted">{v.capacity ? v.capacity.toLocaleString() : '—'}</td>
+                  <td style={{ minWidth: 150 }}>
+                    {v.avgUtil != null ? (
+                      <div className="flex items-center gap-8">
+                        <span className="meter" style={{ flex: 1 }}>
+                          <span style={{ width: `${v.avgUtil}%`, background: utilColor(v.avgUtil) }} />
+                        </span>
+                        <span style={{ width: 34, textAlign: 'right', fontWeight: 600 }}>{v.avgUtil}%</span>
+                      </div>
+                    ) : (
+                      <span className="muted small">n/a</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="card__foot">
+          "Avg. vs capacity" = average attendance ÷ published capacity. Capacity for Inver Park was not
+          included in the supplied dataset, so its utilisation is shown as n/a.
+        </div>
+      </Card>
 
       {/* Biggest crowds */}
       <div className="grid cols-3 mt-16">
@@ -236,4 +266,9 @@ function VenuePoint({ text }) {
 function fmtDate(iso) {
   const d = new Date(iso)
   return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' })
+}
+
+// Utilisation colour band (matches the venue map legend).
+function utilColor(u) {
+  return u >= 30 ? '#0ca30c' : u >= 15 ? '#e19305' : '#d03b3b'
 }
