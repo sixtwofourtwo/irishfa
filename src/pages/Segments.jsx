@@ -38,9 +38,9 @@ export default function Segments() {
         subtitle="Behavioural segments derived from the unified fan record — the foundation for personalised, cross-platform targeting. Click a segment to explore it, or jump straight to its fans."
       />
 
-      {/* Attendee personas — the retention focus */}
+      {/* Attendee categories — the retention focus (one row of four) */}
       <div className="section-title" style={{ marginTop: 0 }}>Attendee Category — Who Actually Comes to Games</div>
-      <div className="grid cols-3">
+      <div className="grid cols-4">
         {attendee.map((s) => (
           <SegmentCard key={s.id} s={s} active={active === s.id} onSelect={() => setActive(s.id)} />
         ))}
