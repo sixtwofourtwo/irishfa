@@ -83,10 +83,15 @@ export function StackedArea({ data, keys, height = 280, prefix = '', suffix = ''
 }
 
 // ---- Simple line trend (single or dual) --------------------------------------
-export function LineTrend({ data, keys, height = 260, prefix = '', suffix = '' }) {
+export function LineTrend({ data, keys, height = 260, prefix = '', suffix = '', onPointClick }) {
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <LineChart data={data} margin={{ top: 8, right: 12, left: -6, bottom: 0 }}>
+      <LineChart
+        data={data}
+        margin={{ top: 8, right: 12, left: -6, bottom: 0 }}
+        onClick={onPointClick ? (e) => e && e.activeLabel != null && onPointClick(e.activeLabel) : undefined}
+        style={onPointClick ? { cursor: 'pointer' } : undefined}
+      >
         <CartesianGrid stroke={INK.grid} vertical={false} />
         <XAxis dataKey="x" {...axisProps} />
         <YAxis {...yAxis} />

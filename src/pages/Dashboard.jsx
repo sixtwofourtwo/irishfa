@@ -27,7 +27,7 @@ export default function Dashboard() {
     <>
       <PageHeader
         title="Fanbase Overview"
-        subtitle="A single, consolidated view of supporter data for the IFA Women's Senior Team — unifying the stadium app, ticketing, Opta, social, email and operational systems."
+        subtitle="A single, consolidated view of supporter data for the IFA Women's Senior Team — unifying the Matchday+ app, ticketing, Opta, social, email and fan-account systems."
       >
         <span className="badge info" title="Data sources connected">
           <Database size={13} /> {integrationSummary.connected}/{integrationSummary.total} sources connected
@@ -155,14 +155,14 @@ export default function Dashboard() {
 
         <Card title="The consolidation story" subtitle="What this platform replaces">
           <p className="small" style={{ color: 'var(--ink-2)', lineHeight: 1.55 }}>
-            Before the Fan Intelligence Platform, this data lived in seven disconnected systems — no single
+            Before the Fan Intelligence Platform, this data lived in disconnected systems — no single
             view of a supporter existed. The platform resolves <strong>{integrationSummary.identitiesResolved.toLocaleString()}</strong>{' '}
             unified fan identities from <strong>{integrationSummary.recordsUnified}m</strong> records, with a{' '}
             <strong>{integrationSummary.matchRate}%</strong> match rate across sources.
           </p>
           <div className="divider" />
           <div className="grid cols-3" style={{ gap: 12 }}>
-            <Metric value="7" label="sources unified" />
+            <Metric value={String(integrationSummary.total)} label="sources unified" />
             <Metric value="21.5k" label="fan profiles" />
             <Metric value="78%" label="identity match" />
           </div>

@@ -7,7 +7,7 @@ export default function Sources() {
     <>
       <PageHeader
         title="Data Sources"
-        subtitle="The seven systems that, until now, held supporter data in isolation. The platform ingests, cleans and matches them into one unified fan record — breaking down the silos."
+        subtitle="The systems that, until now, held supporter data in isolation. The platform ingests, cleans and matches them into one unified fan record — breaking down the silos."
       >
         <button className="btn sm"><RefreshCw size={14} /> Sync all</button>
       </PageHeader>
@@ -20,7 +20,7 @@ export default function Sources() {
       </div>
 
       {/* How it works strip */}
-      <Card className="mt-16" title="How consolidation works" subtitle="From seven silos to one fan record">
+      <Card className="mt-16" title="How consolidation works" subtitle="From siloed systems to one fan record">
         <div className="grid cols-4" style={{ gap: 14 }}>
           <Step n="1" icon={<Link2 size={18} />} title="Connect" body="Each source connects via API or scheduled extract — no manual exports." />
           <Step n="2" icon={<Database size={18} />} title="Ingest & clean" body="Records are standardised, de-duplicated and validated on arrival." />

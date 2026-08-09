@@ -7,9 +7,9 @@
 export const sources = [
   {
     id: 'stadium-app',
-    name: 'Stadium App',
-    type: 'Match-day behaviour & spend',
-    abbr: 'SA',
+    name: 'Matchday+ App',
+    type: 'Match behaviour, experience & spend',
+    abbr: 'M+',
     color: '#0a7d3c',
     status: 'connected',
     records: 41800,
@@ -20,7 +20,7 @@ export const sources = [
     fields: ['Concourse spend', 'Seat / zone', 'Check-in time', 'Push opens', 'Poll & quiz entries', 'Wallet top-ups'],
     health: 99.2,
     blurb:
-      'The official match-day app. Tracks concourse spend, seat location, arrival time, and in-app engagement (polls, predictions, replays) for supporters attending games at the National Football Stadium.',
+      'The official match app. The Matchday+ application extends beyond the stadium, connecting pre‑match anticipation, in‑stadium engagement, and post‑match communication into one continuous fan journey while also hosting tickets, tracking spend, surfacing stadium services and enabling post‑match follow‑up.',
   },
   {
     id: 'ticketmaster',
@@ -51,7 +51,7 @@ export const sources = [
     lastSync: '2 hr ago',
     frequency: 'Per fixture',
     owner: 'Football / Analytics',
-    fields: ['Result & score', 'xG', 'Attendance', 'Possession', 'Key moments', 'Player events'],
+    fields: ['Result & score', 'xG', 'Attendance', 'Venue', 'Venue capacity', 'Possession', 'Key moments', 'Player events'],
     health: 100,
     blurb:
       'On-pitch performance data. Used to correlate results and on-pitch moments with fan engagement spikes, attendance and content performance around fixtures.',
@@ -91,25 +91,8 @@ export const sources = [
       'Email marketing platform. Consolidates subscriber lists, campaign engagement and automation journeys, unifying email identity with ticketing and app profiles.',
   },
   {
-    id: 'winners',
-    name: 'Winners (Tableau)',
-    type: 'Operational dashboards',
-    abbr: 'WN',
-    color: '#1baf7a',
-    status: 'connected',
-    records: 22,
-    recordLabel: 'dashboards',
-    lastSync: '1 hr ago',
-    frequency: 'Daily',
-    owner: 'Operations',
-    fields: ['Operational KPIs', 'Stewarding & safety', 'F&B stock', 'Retail sales', 'Car parking', 'Historic benchmarks'],
-    health: 94.1,
-    blurb:
-      'Existing Tableau dashboards maintained by Winners covering operational and commercial data. Extracts are pulled into the platform so operational context sits alongside fan behaviour.',
-  },
-  {
     id: 'web-crm',
-    name: 'Web & Fan Accounts',
+    name: 'App & Fan Accounts',
     type: 'Registrations & preferences',
     abbr: 'WB',
     color: '#eb6834',

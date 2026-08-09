@@ -46,7 +46,7 @@ export const fans = [
     consent: true,
     ticketType: 'Season ticket — Block E',
     entryPoint: 'Season-ticket holder since 2016',
-    channels: ['Stadium App', 'Ticketmaster', 'Social', 'Mailchimp', 'Web'],
+    channels: ['Matchday+ App', 'Ticketmaster', 'Social', 'Mailchimp', 'App & Fan Accounts'],
     tags: ['Season ticket', 'Merch buyer', 'Referrer'],
     knowledge: [
       'Renews her season ticket every year',
@@ -57,10 +57,10 @@ export const fans = [
     stats: { attendance: 11, appSpend: 148, ticketSpend: 420, emailOpen: 82, socialEng: 214 },
     timeline: [
       { type: 'ticket', title: 'Renewed 2025/26 season ticket', meta: 'Block E · Row 12', source: 'Ticketmaster', when: '3 days ago' },
-      { type: 'app', title: 'Spent £24.50 on concourse (half-time)', meta: 'vs. Republic of Ireland', source: 'Stadium App', when: '9 days ago' },
+      { type: 'app', title: 'Spent £24.50 on concourse (half-time)', meta: 'vs. Republic of Ireland', source: 'Matchday+ App', when: '9 days ago' },
       { type: 'social', title: 'Shared match highlights reel', meta: '2,140 impressions from her share', source: 'Social', when: '9 days ago' },
       { type: 'email', title: 'Opened "Euro qualifier tickets" email', meta: 'Clicked through to buy', source: 'Mailchimp', when: '2 weeks ago' },
-      { type: 'merch', title: 'Bought home shirt + scarf', meta: '£68.00 online', source: 'Web', when: '3 weeks ago' },
+      { type: 'merch', title: 'Bought home shirt + scarf', meta: '£68.00 online', source: 'App & Fan Accounts', when: '3 weeks ago' },
     ],
   },
   {
@@ -92,7 +92,7 @@ export const fans = [
     timeline: [
       { type: 'ticket', title: 'Booked 4 tickets (family)', meta: 'vs. Slovenia · Nations League', source: 'Ticketmaster', when: '5 days ago' },
       { type: 'email', title: 'Clicked "Family match-day guide"', meta: 'Campaign: Autumn fixtures', source: 'Mailchimp', when: '1 week ago' },
-      { type: 'app', title: 'Redeemed junior meal deal', meta: '£18.00', source: 'Stadium App', when: '1 week ago' },
+      { type: 'app', title: 'Redeemed junior meal deal', meta: '£18.00', source: 'Matchday+ App', when: '1 week ago' },
     ],
   },
   {
@@ -113,7 +113,7 @@ export const fans = [
     consent: true,
     ticketType: 'Single match ticket',
     entryPoint: 'TikTok campaign sign-up',
-    channels: ['Social', 'Mailchimp', 'Web'],
+    channels: ['Social', 'Mailchimp', 'App & Fan Accounts'],
     tags: ['High social', 'Content consumer', 'Conversion target'],
     knowledge: [
       'Very high social engagement (312 interactions / 90 days)',
@@ -145,7 +145,7 @@ export const fans = [
     consent: true,
     ticketType: 'Family zone × 5',
     entryPoint: 'Junior fan club sign-up',
-    channels: ['Ticketmaster', 'Stadium App', 'Mailchimp'],
+    channels: ['Ticketmaster', 'Matchday+ App', 'Mailchimp'],
     tags: ['Junior member', 'Group booker'],
     knowledge: [
       'Junior member in the household',
@@ -154,7 +154,7 @@ export const fans = [
     ],
     stats: { attendance: 5, appSpend: 94, ticketSpend: 165, emailOpen: 66, socialEng: 47 },
     timeline: [
-      { type: 'app', title: 'Entered half-time penalty prediction', meta: 'Won a signed poster', source: 'Stadium App', when: '9 days ago' },
+      { type: 'app', title: 'Entered half-time penalty prediction', meta: 'Won a signed poster', source: 'Matchday+ App', when: '9 days ago' },
       { type: 'ticket', title: 'Booked family zone × 5', meta: 'vs. Republic of Ireland', source: 'Ticketmaster', when: '2 weeks ago' },
       { type: 'email', title: 'Signed up junior to fan club', meta: 'Campaign: Junior Green Army', source: 'Mailchimp', when: '1 month ago' },
     ],
@@ -208,7 +208,7 @@ export const fans = [
     consent: true,
     ticketType: 'Single match ticket',
     entryPoint: 'App download at a game',
-    channels: ['Web', 'Social', 'Ticketmaster', 'Stadium App'],
+    channels: ['App & Fan Accounts', 'Social', 'Ticketmaster', 'Matchday+ App'],
     tags: ['Onboarding', 'First-time buyer'],
     knowledge: [
       'Downloaded the stadium app at her first game',
@@ -218,7 +218,7 @@ export const fans = [
     stats: { attendance: 1, appSpend: 12, ticketSpend: 26, emailOpen: 58, socialEng: 64 },
     timeline: [
       { type: 'ticket', title: 'First ticket — Euro qualifier', meta: 'Acquired via social campaign', source: 'Ticketmaster', when: '2 weeks ago' },
-      { type: 'app', title: 'Downloaded stadium app', meta: 'First check-in', source: 'Stadium App', when: '2 weeks ago' },
+      { type: 'app', title: 'Downloaded stadium app', meta: 'First check-in', source: 'Matchday+ App', when: '2 weeks ago' },
       { type: 'email', title: 'Welcome series — step 1 opened', meta: 'Onboarding journey', source: 'Mailchimp', when: '13 days ago' },
     ],
   },
@@ -240,7 +240,7 @@ export const fans = [
     consent: false,
     ticketType: '2 × standard',
     entryPoint: 'Ticket purchase (2018)',
-    channels: ['Ticketmaster', 'Stadium App'],
+    channels: ['Ticketmaster', 'Matchday+ App'],
     tags: ['No marketing consent', 'High attender'],
     knowledge: [
       'No marketing consent — cannot currently be emailed',
@@ -250,7 +250,7 @@ export const fans = [
     stats: { attendance: 7, appSpend: 88, ticketSpend: 245, emailOpen: 0, socialEng: 22 },
     timeline: [
       { type: 'ticket', title: 'Bought 2 tickets', meta: 'vs. Slovenia', source: 'Ticketmaster', when: '6 days ago' },
-      { type: 'app', title: 'Concourse spend £31.00', meta: 'Craft beer + food', source: 'Stadium App', when: '6 days ago' },
+      { type: 'app', title: 'Concourse spend £31.00', meta: 'Craft beer + food', source: 'Matchday+ App', when: '6 days ago' },
     ],
   },
   {
@@ -271,7 +271,7 @@ export const fans = [
     consent: true,
     ticketType: 'Season ticket',
     entryPoint: 'Season-ticket holder',
-    channels: ['Stadium App', 'Ticketmaster', 'Social', 'Mailchimp', 'Web'],
+    channels: ['Matchday+ App', 'Ticketmaster', 'Social', 'Mailchimp', 'App & Fan Accounts'],
     tags: ['Season ticket', 'Ambassador', 'Merch buyer'],
     knowledge: [
       'Acts as an informal fan ambassador',
@@ -280,9 +280,9 @@ export const fans = [
     ],
     stats: { attendance: 10, appSpend: 132, ticketSpend: 390, emailOpen: 88, socialEng: 188 },
     timeline: [
-      { type: 'merch', title: 'Pre-ordered 2026 away shirt', meta: '£55.00', source: 'Web', when: '1 day ago' },
+      { type: 'merch', title: 'Pre-ordered 2026 away shirt', meta: '£55.00', source: 'App & Fan Accounts', when: '1 day ago' },
       { type: 'social', title: 'Tagged in fan-of-the-match post', meta: '4,900 impressions', source: 'Social', when: '9 days ago' },
-      { type: 'app', title: 'Concourse spend £22.00', meta: 'vs. Republic of Ireland', source: 'Stadium App', when: '9 days ago' },
+      { type: 'app', title: 'Concourse spend £22.00', meta: 'vs. Republic of Ireland', source: 'Matchday+ App', when: '9 days ago' },
     ],
   },
   {
@@ -303,7 +303,7 @@ export const fans = [
     consent: true,
     ticketType: '—',
     entryPoint: 'Instagram follow (2024)',
-    channels: ['Social', 'Web'],
+    channels: ['Social', 'App & Fan Accounts'],
     tags: ['International', 'Streaming'],
     knowledge: [
       'International supporter (Dublin, ROI)',
@@ -313,7 +313,7 @@ export const fans = [
     stats: { attendance: 0, appSpend: 0, ticketSpend: 0, emailOpen: 34, socialEng: 276 },
     timeline: [
       { type: 'social', title: 'Saved Instagram highlight', meta: 'Engaged 6× this week', source: 'Social', when: '1 day ago' },
-      { type: 'web', title: 'Viewed match centre live', meta: '90 mins on-page', source: 'Web', when: '9 days ago' },
+      { type: 'web', title: 'Viewed match centre live', meta: '90 mins on-page', source: 'App & Fan Accounts', when: '9 days ago' },
     ],
   },
   {
@@ -334,7 +334,7 @@ export const fans = [
     consent: true,
     ticketType: 'Family zone × 4',
     entryPoint: 'Group booking (2022)',
-    channels: ['Ticketmaster', 'Stadium App', 'Mailchimp'],
+    channels: ['Ticketmaster', 'Matchday+ App', 'Mailchimp'],
     tags: ['Group booker', 'Junior member'],
     knowledge: [
       'Books the family zone (4 tickets)',
@@ -344,7 +344,7 @@ export const fans = [
     stats: { attendance: 4, appSpend: 76, ticketSpend: 148, emailOpen: 61, socialEng: 38 },
     timeline: [
       { type: 'ticket', title: 'Booked family zone × 4', meta: 'vs. Wales', source: 'Ticketmaster', when: '10 days ago' },
-      { type: 'app', title: 'Junior meal deal redeemed', meta: '£16.00', source: 'Stadium App', when: '10 days ago' },
+      { type: 'app', title: 'Junior meal deal redeemed', meta: '£16.00', source: 'Matchday+ App', when: '10 days ago' },
     ],
   },
   {
@@ -429,7 +429,7 @@ export const fans = [
     consent: true,
     ticketType: 'Family zone × 3',
     entryPoint: 'Online ticket purchase',
-    channels: ['Ticketmaster', 'Stadium App', 'Mailchimp'],
+    channels: ['Ticketmaster', 'Matchday+ App', 'Mailchimp'],
     tags: ['Family booker', 'Travels to games'],
     knowledge: [
       'Travels from Lisburn (~13 km) with two children',
@@ -440,7 +440,7 @@ export const fans = [
     stats: { attendance: 3, appSpend: 34, ticketSpend: 66, emailOpen: 66, socialEng: 38 },
     timeline: [
       { type: 'ticket', title: 'Booked family zone × 3', meta: 'vs. Türkiye', source: 'Ticketmaster', when: '14 Mar 2026' },
-      { type: 'app', title: 'Redeemed junior meal deals', meta: '£12.00', source: 'Stadium App', when: '14 Mar 2026' },
+      { type: 'app', title: 'Redeemed junior meal deals', meta: '£12.00', source: 'Matchday+ App', when: '14 Mar 2026' },
       { type: 'ticket', title: 'First family booking', meta: 'vs. Switzerland', source: 'Ticketmaster', when: '8 Feb 2026' },
     ],
   },
@@ -526,7 +526,7 @@ export const fans = [
     consent: true,
     ticketType: 'Family zone × 3',
     entryPoint: 'App download at a game',
-    channels: ['Ticketmaster', 'Stadium App'],
+    channels: ['Ticketmaster', 'Matchday+ App'],
     tags: ['Family booker', 'Returned'],
     knowledge: [
       'Travels from Ballymena (~45 km) with children',
@@ -536,7 +536,7 @@ export const fans = [
     stats: { attendance: 2, appSpend: 26, ticketSpend: 44, emailOpen: 58, socialEng: 31 },
     timeline: [
       { type: 'ticket', title: 'Second family booking', meta: 'vs. Switzerland', source: 'Ticketmaster', when: '8 Feb 2026' },
-      { type: 'app', title: 'Downloaded app at first game', meta: 'First check-in', source: 'Stadium App', when: '6 Dec 2025' },
+      { type: 'app', title: 'Downloaded app at first game', meta: 'First check-in', source: 'Matchday+ App', when: '6 Dec 2025' },
     ],
   },
   {
@@ -557,7 +557,7 @@ export const fans = [
     consent: true,
     ticketType: 'Single match ticket',
     entryPoint: 'App download at a game',
-    channels: ['Ticketmaster', 'Stadium App'],
+    channels: ['Ticketmaster', 'Matchday+ App'],
     tags: ['At risk', 'First-timer'],
     knowledge: [
       'Travels from Omagh (~110 km)',
@@ -568,7 +568,7 @@ export const fans = [
     stats: { attendance: 1, appSpend: 12, ticketSpend: 22, emailOpen: 30, socialEng: 9 },
     timeline: [
       { type: 'ticket', title: 'First ticket purchase', meta: 'vs. Türkiye', source: 'Ticketmaster', when: '14 Mar 2026' },
-      { type: 'app', title: 'App download at the game', meta: 'First check-in', source: 'Stadium App', when: '14 Mar 2026' },
+      { type: 'app', title: 'App download at the game', meta: 'First check-in', source: 'Matchday+ App', when: '14 Mar 2026' },
     ],
   },
   {
@@ -621,7 +621,7 @@ export const fans = [
     consent: true,
     ticketType: '2 × standard',
     entryPoint: 'Online ticket purchase',
-    channels: ['Ticketmaster', 'Stadium App', 'Mailchimp', 'Social'],
+    channels: ['Ticketmaster', 'Matchday+ App', 'Mailchimp', 'Social'],
     tags: ['Committed', 'Local'],
     knowledge: [
       'Belfast-based — low travel barrier',
@@ -632,7 +632,7 @@ export const fans = [
     stats: { attendance: 4, appSpend: 64, ticketSpend: 88, emailOpen: 70, socialEng: 52 },
     timeline: [
       { type: 'ticket', title: 'Bought 2 tickets', meta: 'vs. Türkiye', source: 'Ticketmaster', when: '14 Mar 2026' },
-      { type: 'app', title: 'Concourse spend £18.00', meta: 'Food + programme', source: 'Stadium App', when: '14 Mar 2026' },
+      { type: 'app', title: 'Concourse spend £18.00', meta: 'Food + programme', source: 'Matchday+ App', when: '14 Mar 2026' },
     ],
   },
   {

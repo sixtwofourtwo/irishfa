@@ -64,7 +64,7 @@ export default function Fans() {
     <>
       <PageHeader
         title="Fan 360 Profiles"
-        subtitle="Every supporter as a single unified record — attendance, spend, digital engagement and preferences drawn together from all seven sources. Filter by segment or retention status, then act."
+        subtitle="Every supporter as a single unified record — attendance, spend, digital engagement and preferences drawn together from every connected source. Filter by segment or retention status, then act."
       >
         <button className="btn primary sm">
           <Send size={14} /> {activeSegmentName ? `Send communication to ${activeSegmentName}` : 'Send communication to this segment'}

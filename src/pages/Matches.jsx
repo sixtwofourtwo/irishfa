@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { MapPin, TrendingUp, Trophy, Database, Zap } from 'lucide-react'
+import { TrendingUp, Database, Ticket, TicketPercent, Users, Gift, CreditCard } from 'lucide-react'
 import { PageHeader, Card, Badge, StatTile, Legend } from '../components/ui.jsx'
 import { LineTrend, BarsV } from '../components/charts.jsx'
 import VenueMap from '../components/VenueMap.jsx'
@@ -9,9 +9,12 @@ import {
   record, seasons, homeAttBySeason, distinctHomeGrounds,
   venuesRanked, biggestCrowds, recentForm, attByResult,
 } from '../data/matchStats.js'
+import { TICKET_TYPES, ticketsForMatches, homeTicketMatches } from '../data/tickets.js'
 
 const resultTone = { W: 'good', D: 'warn', L: 'crit' }
 const resultLabel = { W: 'W', D: 'D', L: 'L' }
+const TICKET_ICONS = { Ticket, TicketPercent, Users, Gift, CreditCard }
+const matchKey = (m) => `${m.date}__${m.opponent}`
 
 export default function Matches() {
   const [season, setSeason] = useState('all')
@@ -30,6 +33,33 @@ export default function Matches() {
     { key: 'avg', label: 'Season average', color: BRAND[600] },
   ]
   const resultData = attByResult.map((r) => ({ x: r.result, avg: r.avg }))
+
+  // --- Ticket-type sales, driven by the selected event ---------------------
+  const latestSeason = seasons[seasons.length - 1]
+  const [ticketSel, setTicketSel] = useState({ mode: 'season', season: latestSeason })
+  const seasonLabelToFull = useMemo(
+    () => Object.fromEntries(homeAttBySeason.map((s) => [s.season, s.seasonFull])),
+    [],
+  )
+  const selectedKey = ticketSel.mode === 'match' ? ticketSel.key : null
+  const isTicketEligible = (m) => m.home && m.niGround && typeof m.attendance === 'number'
+  const selMatches =
+    ticketSel.mode === 'all'
+      ? homeTicketMatches
+      : ticketSel.mode === 'match'
+      ? homeTicketMatches.filter((m) => matchKey(m) === ticketSel.key)
+      : homeTicketMatches.filter((m) => m.season === ticketSel.season)
+  const { total: ticketTotal, counts: ticketCounts } = ticketsForMatches(selMatches)
+  const selMatch = ticketSel.mode === 'match' ? selMatches[0] : null
+  const ticketLabel =
+    ticketSel.mode === 'all'
+      ? 'All home fixtures'
+      : ticketSel.mode === 'match' && selMatch
+      ? `${selMatch.home ? 'vs' : '@'} ${selMatch.opponent} · ${fmtDate(selMatch.date)}`
+      : `${ticketSel.season} season`
+  const selectMatchForTickets = (m) => {
+    if (isTicketEligible(m)) setTicketSel({ mode: 'match', key: matchKey(m) })
+  }
 
   return (
     <>
@@ -56,7 +86,15 @@ export default function Matches() {
           className="span-2"
           action={<Legend items={attKeys.map((k) => ({ label: k.label, color: k.color }))} />}
         >
-          <LineTrend data={attData} keys={attKeys} height={250} />
+          <LineTrend
+            data={attData}
+            keys={attKeys}
+            height={250}
+            onPointClick={(label) => {
+              const full = seasonLabelToFull[label]
+              if (full) setTicketSel({ mode: 'season', season: full })
+            }}
+          />
           <div className="flex gap-8 wrap items-center" style={{ marginTop: 8 }}>
             <span className="badge good">
               <TrendingUp size={13} /> Average up from ~600 (2017/18); Windsor Park qualifier peaked at 15,348
@@ -76,6 +114,56 @@ export default function Matches() {
             pricing and demand forecasting.
           </p>
         </Card>
+      </div>
+
+      {/* Ticket sales by type — reflects the selected event */}
+      <div className="section-title">Ticket sales by type — {ticketLabel}</div>
+      <div className="chip-row" style={{ marginBottom: 12 }}>
+        <button
+          className={`chip${ticketSel.mode === 'season' && ticketSel.season === latestSeason ? ' active' : ''}`}
+          onClick={() => setTicketSel({ mode: 'season', season: latestSeason })}
+        >
+          {latestSeason} season
+        </button>
+        <button
+          className={`chip${ticketSel.mode === 'all' ? ' active' : ''}`}
+          onClick={() => setTicketSel({ mode: 'all' })}
+        >
+          All fixtures
+        </button>
+        {ticketSel.mode === 'match' && (
+          <button className="chip active" onClick={() => setTicketSel({ mode: 'season', season: latestSeason })}>
+            {ticketLabel} ✕
+          </button>
+        )}
+        <span className="muted small" style={{ alignSelf: 'center' }}>
+          Tip: click a season on the chart above, or a fixture below, to update these cards.
+        </span>
+      </div>
+      <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}>
+        {TICKET_TYPES.map((t) => {
+          const Icon = TICKET_ICONS[t.icon] || Ticket
+          const count = ticketCounts[t.key] || 0
+          const pct = ticketTotal ? Math.round((count / ticketTotal) * 100) : 0
+          return (
+            <div className="stat" key={t.key}>
+              <div className="stat__label">
+                <span className="stat__icon" style={{ background: '#f1f3f2', color: t.color }}>
+                  <Icon size={17} />
+                </span>
+                {t.label}
+              </div>
+              <div className="stat__value">{count.toLocaleString()}</div>
+              <div className="stat__meta">
+                {t.planned ? (
+                  <span className="badge gray">Planned — future</span>
+                ) : (
+                  <span className="stat__sub">{pct}% of tickets</span>
+                )}
+              </div>
+            </div>
+          )
+        })}
       </div>
 
       {/* HOME VENUES — map + figures side by side (one screenful) */}
@@ -175,18 +263,27 @@ export default function Matches() {
                 </tr>
               </thead>
               <tbody>
-                {[...recentForm].reverse().map((m) => (
-                  <tr key={m.date + m.opponent}>
-                    <td className="muted small">{fmtDate(m.date)}</td>
-                    <td style={{ fontWeight: 600 }}>{m.home ? 'vs ' : '@ '}{m.opponent}</td>
-                    <td className="muted small">{m.competition}</td>
-                    <td className="muted small">{m.venue}</td>
-                    <td className="num">
-                      <Badge tone={resultTone[m.result]}>{resultLabel[m.result]} {m.niScore}-{m.oppScore}</Badge>
-                    </td>
-                    <td className="num">{m.attendance ? m.attendance.toLocaleString() : '—'}</td>
-                  </tr>
-                ))}
+                {[...recentForm].reverse().map((m) => {
+                  const eligible = isTicketEligible(m)
+                  const isSel = matchKey(m) === selectedKey
+                  return (
+                    <tr
+                      key={m.date + m.opponent}
+                      className={eligible ? 'row-link' : ''}
+                      onClick={eligible ? () => selectMatchForTickets(m) : undefined}
+                      style={isSel ? { background: 'var(--brand-050)' } : undefined}
+                    >
+                      <td className="muted small">{fmtDate(m.date)}</td>
+                      <td style={{ fontWeight: 600 }}>{m.home ? 'vs ' : '@ '}{m.opponent}</td>
+                      <td className="muted small">{m.competition}</td>
+                      <td className="muted small">{m.venue}</td>
+                      <td className="num">
+                        <Badge tone={resultTone[m.result]}>{resultLabel[m.result]} {m.niScore}-{m.oppScore}</Badge>
+                      </td>
+                      <td className="num">{m.attendance ? m.attendance.toLocaleString() : '—'}</td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>
@@ -218,20 +315,29 @@ export default function Matches() {
               </tr>
             </thead>
             <tbody>
-              {fixtures.map((m) => (
-                <tr key={m.date + m.opponent}>
-                  <td className="muted small">{fmtDate(m.date)}</td>
-                  <td style={{ fontWeight: 600 }}>
-                    {m.home ? 'vs ' : '@ '}{m.opponent}
-                    {!m.niGround && m.home && <span className="muted small"> (neutral)</span>}
-                  </td>
-                  <td className="muted small">{m.competition}</td>
-                  <td className="muted small">{m.venue}</td>
-                  <td className="num"><Badge tone={resultTone[m.result]}>{resultLabel[m.result]} {m.niScore}-{m.oppScore}</Badge></td>
-                  <td className="num">{m.attendance ? m.attendance.toLocaleString() : <span className="muted">n/a</span>}</td>
-                  <td className="num muted">{m.capacity ? m.capacity.toLocaleString() : '—'}</td>
-                </tr>
-              ))}
+              {fixtures.map((m) => {
+                const eligible = isTicketEligible(m)
+                const isSel = matchKey(m) === selectedKey
+                return (
+                  <tr
+                    key={m.date + m.opponent}
+                    className={eligible ? 'row-link' : ''}
+                    onClick={eligible ? () => selectMatchForTickets(m) : undefined}
+                    style={isSel ? { background: 'var(--brand-050)' } : undefined}
+                  >
+                    <td className="muted small">{fmtDate(m.date)}</td>
+                    <td style={{ fontWeight: 600 }}>
+                      {m.home ? 'vs ' : '@ '}{m.opponent}
+                      {!m.niGround && m.home && <span className="muted small"> (neutral)</span>}
+                    </td>
+                    <td className="muted small">{m.competition}</td>
+                    <td className="muted small">{m.venue}</td>
+                    <td className="num"><Badge tone={resultTone[m.result]}>{resultLabel[m.result]} {m.niScore}-{m.oppScore}</Badge></td>
+                    <td className="num">{m.attendance ? m.attendance.toLocaleString() : <span className="muted">n/a</span>}</td>
+                    <td className="num muted">{m.capacity ? m.capacity.toLocaleString() : '—'}</td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>

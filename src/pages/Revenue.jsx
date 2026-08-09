@@ -1,9 +1,14 @@
+import { Ticket, TicketPercent, Users, Gift, CreditCard } from 'lucide-react'
 import { PageHeader, Card, StatTile, Delta, Legend, BarList } from '../components/ui.jsx'
 import { BarsV, Donut } from '../components/charts.jsx'
 import { SERIES } from '../theme.js'
 import {
   revenueKpis, revenueByStream, revenueTrend, revenueBySegment, spendCategories,
 } from '../data/revenue.js'
+import { ticketIncome, latestSeason } from '../data/tickets.js'
+
+const TICKET_ICONS = { Ticket, TicketPercent, Users, Gift, CreditCard }
+const fmtGBP = (n) => (n >= 1000 ? `£${(n / 1000).toFixed(1)}k` : `£${n}`)
 
 const trendKeys = [
   { key: 'ticketing', label: 'Ticketing', color: SERIES[1] },
@@ -47,6 +52,32 @@ export default function Revenue() {
             <Legend items={stream.map((s) => ({ label: `${s.name} · £${s.value}k`, color: s.color }))} />
           </div>
         </Card>
+      </div>
+
+      {/* Income by ticket type */}
+      <div className="section-title">Income by ticket type — {latestSeason} season</div>
+      <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}>
+        {ticketIncome.map((t) => {
+          const Icon = TICKET_ICONS[t.icon] || Ticket
+          return (
+            <div className="stat" key={t.key}>
+              <div className="stat__label">
+                <span className="stat__icon" style={{ background: '#f1f3f2', color: t.color }}>
+                  <Icon size={17} />
+                </span>
+                {t.label}
+              </div>
+              <div className="stat__value">{fmtGBP(t.income)}</div>
+              <div className="stat__meta">
+                {t.planned ? (
+                  <span className="badge gray">Planned — future</span>
+                ) : (
+                  <span className="stat__sub">{t.count.toLocaleString()} tickets · £{t.price}/ticket</span>
+                )}
+              </div>
+            </div>
+          )
+        })}
       </div>
 
       <div className="grid cols-3 mt-16">

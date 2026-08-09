@@ -26,7 +26,7 @@ export default function Alerts() {
     <>
       <PageHeader
         title="Alerts & Insights"
-        subtitle="The platform continuously scans across all seven sources and surfaces what matters — opportunities, risks and wins that no single system could see on its own."
+        subtitle="The platform continuously scans across all connected sources and surfaces what matters — opportunities, risks and wins that no single system could see on its own."
       />
 
       <div className="grid cols-3">

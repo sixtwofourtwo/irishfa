@@ -39,7 +39,7 @@ export default function Segments() {
       />
 
       {/* Attendee personas — the retention focus */}
-      <div className="section-title" style={{ marginTop: 0 }}>Attendee personas — who actually comes to games</div>
+      <div className="section-title" style={{ marginTop: 0 }}>Attendee Category — Who Actually Comes to Games</div>
       <div className="grid cols-3">
         {attendee.map((s) => (
           <SegmentCard key={s.id} s={s} active={active === s.id} onSelect={() => setActive(s.id)} />

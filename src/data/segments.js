@@ -56,6 +56,22 @@ export const segments = [
     traits: ['Bulk ticket buyers', 'Youth clubs & community groups', 'One contact captured', 'Data-capture gap'],
     channels: { app: 22, social: 34, email: 58, ticketing: 82 },
   },
+  {
+    id: 'other-adults',
+    group: 'attendee',
+    name: 'Other Adult Supporters',
+    color: 'var(--series-1)',
+    size: 4900,
+    trend: 7.0,
+    trendDir: 'up',
+    avgValue: 34,
+    engagement: 55,
+    short: 'Attendees without children who are a mixed demographic — these can be solo or multiple ticket buyers.',
+    description:
+      'Attendees without children who are a mixed demographic — these can be solo or multiple ticket buyers. By far the largest volume of match attendees and the core of the live audience.',
+    traits: ['No children', 'Mixed demographic', 'Solo or multiple buyers', 'Largest attendee volume'],
+    channels: { app: 52, social: 58, email: 60, ticketing: 76 },
+  },
 
   // ---- Lifecycle segments ------------------------------------------------
   {
