@@ -12,7 +12,7 @@ export default function Sidebar({ open, onClose }) {
         </div>
         <div>
           <h1>Fan Intelligence</h1>
-          <span>Irish Football Association · Women's Senior Team</span>
+          <span>Irish FA · Women's Team</span>
         </div>
       </div>
 
