@@ -68,7 +68,7 @@ export const segments = [
     engagement: 55,
     short: 'Attendees without children, a mixed demographic — these can be solo or multiple ticket buyers.',
     description:
-      'Attendees without children who are a mixed demographic — these can be solo or multiple ticket buyers. By far the largest volume of match attendees and the core of the live audience.',
+      'Attendees without children, a mixed demographic — these can be solo or multiple ticket buyers. By far the largest volume of match attendees and the core of the live audience.',
     traits: ['No children', 'Mixed demographic', 'Solo or multiple buyers', 'Largest attendee volume'],
     channels: { app: 52, social: 58, email: 60, ticketing: 76 },
   },
